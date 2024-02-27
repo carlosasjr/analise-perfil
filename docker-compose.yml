@@ -1,0 +1,93 @@
+version: "3.7"
+
+services:
+    # image project
+    app:
+        container_name: perfil
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: especializati/laravel9-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - redis
+        networks:
+            - api-perfil
+
+    # nginx
+    nginx:
+        container_name: perfil-nginx
+        image: nginx:alpine
+        restart: unless-stopped
+        ports:
+            - "8000:80"
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        networks:
+            - api-perfil
+
+    # db mysql
+    mysql:
+        container_name: perfil-mysql
+        image: mysql:5.7.22
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+        volumes:
+            - ./.docker/mysql/dbdata:/var/lib/mysql
+        ports:
+            - "3388:3306"
+        networks:
+            - api-perfil
+
+    phpmyadmin:
+        container_name: perfil-phpmyadmin
+        image: phpmyadmin/phpmyadmin:latest
+        restart: always
+        ports:
+            - 8081:80
+        links:
+            - mysql
+        environment:
+            - PMA_ARBITRARY=1
+            - UPLOAD_LIMIT=1G
+        networks:
+            - api-perfil
+
+    # queue
+    queue:
+        container_name: perfil-queue
+        image: especializati/laravel9-app
+        restart: always
+        command: "php artisan queue:work --timeout=180"
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - redis
+            - app
+        networks:
+            - api-perfil
+
+    # redis
+    redis:
+        container_name: perfil-redis
+        image: redis:alpine
+        command: redis-server --appendonly yes --replica-read-only no
+        restart: always
+        ports:
+            - "6379:6379"
+        expose:
+            - "6379"
+        networks:
+            - api-perfil
+
+networks:
+    api-perfil:
+        driver: bridge
