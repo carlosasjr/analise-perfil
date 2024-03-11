@@ -24,31 +24,13 @@
 
 
                             <div class="card-body">
-
-                                <form id="wizardForm" method="POST"
-                                    action="{{ route('user.answers', ['url' => $url, 'id' => $id]) }}">
-                                    @csrf
-
-                                    @foreach ($questions as $index => $question)
-                                        <div class="form-group">
-                                            <label for="step{{ $question->id }}">{{ $index + 1 }} -
-                                                {{ $question->question }}</label>
-                                            <input type="hidden" name="question_ids[]" value="{{ $question->id }}">
-                                            <select name="scores[]" class="form-control" id="step{{ $question->id }}">
-                                                @for ($i = 0; $i <= 5; $i++)
-                                                    <option value="{{ $i }}">{{ $i }}</option>
-                                                @endfor
-                                            </select>
-                                        </div>
-                                    @endforeach
-
-
-                                    <div class="form-group1 mt-5">
-                                        <button type="button" class="btn btn-secondary" id="prevBtn">Anterior</button>
-                                        <button type="button" class="btn btn-primary" id="nextBtn">Próximo</button>
-                                        <button type="submit" class="btn btn-success" id="submitBtn">Enviar</button>
+                                <div class="row mb-0">
+                                    <div class="col-md-12 text-center">
+                                        <a href="{{ route('user.questions', [$url, $id])}}" class="btn btn-primary btn-lg btn-block">
+                                            {{ __('Responder Questionário') }}
+                                        </a>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>

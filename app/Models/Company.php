@@ -11,7 +11,7 @@ class Company extends Model
 {
     use HasFactory, Notifiable;
 
-    protected $fillable = ['name', 'cnpj', 'email', 'url'];
+    protected $fillable = ['name', 'cnpj', 'email', 'url', 'phone'];
 
     public function users()
     {

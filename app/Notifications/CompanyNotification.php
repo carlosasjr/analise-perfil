@@ -46,7 +46,7 @@ class CompanyNotification extends Notification
         return (new MailMessage)
             ->subject('Registro no ' . config('app.name'))
             ->greeting('Olá, ' . $this->company->name)
-            ->line("Segue sua url do " . config('app.name') . 'para compartilhar com seus amigos.')
+            ->line("Segue sua url do " . config('app.name') . ' para compartilhar com seus amigos.')
             ->action($url, $url)
             ->salutation('Conte com a gente sempre!');
     }

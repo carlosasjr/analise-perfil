@@ -15,13 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [CompanyController::class, 'create'])->name('company.create');
+Route::get('/{url?}', [CompanyController::class, 'create'])->name('company.create');
 
 Route::post('/empresas', [CompanyController::class, 'store'])->name('company.store');
 
 Route::get('/empresas/{url}/usuario', [UserController::class, 'create'])->name('user.create');
 
 Route::post('/empresas/{url}/usuario', [UserController::class, 'store'])->name('user.store');
+
+Route::get('/empresas/{url}/usuario/{id}/instrucoes', [UserController::class, 'show'])->name('user.show');
 
 Route::get('/empresas/{url}/usuario/{id}/perguntas', [UserController::class, 'questions'])->name('user.questions');
 

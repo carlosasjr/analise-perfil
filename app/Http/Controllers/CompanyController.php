@@ -13,15 +13,15 @@ class CompanyController extends Controller
 
     }
 
-    public function create()
+    public function create($url = null)
     {
-        return view('company.create');
+        return view('company.create', compact('url'));
     }
 
     public function store(CompanyRequest $request)
     {
         $company = $this->repository->create($request->validated());
 
-        return redirect()->route('user.create', ['url' => $company->url]);
+        return redirect()->route('company.create', ['url' => $company->url]);
     }
 }

@@ -3,12 +3,13 @@
 namespace App\Mail;
 
 use App\Models\User;
+use App\Models\Company;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserAnswersMail extends Mailable
+class CompanyAnswersMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,7 +20,8 @@ class UserAnswersMail extends Mailable
      */
     public function __construct(
         private $user_answers,
-        private User $user
+        private User $user,
+        private Company $company
     ) {
         //
     }
@@ -36,6 +38,6 @@ class UserAnswersMail extends Mailable
             'user' => $this->user
         ])
             ->subject('Analise de Perfil - ' . config('app.name'))
-            ->to($this->user->email);
+            ->to($this->company->email);
     }
 }

@@ -22,7 +22,7 @@ class User extends Authenticatable
         'company_id',
         'name',
         'email',
-        'password',
+        'phone',
     ];
 
     /**
@@ -47,5 +47,10 @@ class User extends Authenticatable
     public function answers()
     {
         return $this->hasMany(Answer::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 }
