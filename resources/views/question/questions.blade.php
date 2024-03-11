@@ -18,17 +18,21 @@
                                                 {{ $question->question }}</label>
                                         </div>
 
-                                        <div class="card-body">
+                                        <div class="card-body d-flex justify-content-around">
                                             <input type="hidden" name="answers[{{ $question->id }}][question_id]"
                                                 value="{{ $question->id }}">
+                                            <strong class="font-weight-bold">Nada a ver comigo</strong>
                                             @for ($i = 0; $i <= 5; $i++)
-                                                <input type="radio" name="answers[{{ $question->id }}][score]"
-                                                    class="form-check-input" value="{{ $i }}"
-                                                    id="score{{ $question->id }}_{{ $i }}"
-                                                    {{ $i == 0 ? 'checked' : '' }}>
-                                                <label class="form-check-label"
-                                                    for="score{{ $question->id }}_{{ $i }}">{{ $i }}</label>
+                                                <div class="mr-2 d-flex justify-content-around">
+                                                    <input type="radio" name="answers[{{ $question->id }}][score]"
+                                                        class="form-check-input" value="{{ $i }}"
+                                                        id="score{{ $question->id }}_{{ $i }}"
+                                                        {{ $i == 0 ? 'checked' : '' }}>
+                                                    <strong class="form-check-label"
+                                                        for="score{{ $question->id }}_{{ $i }}">{{ $i }}</strong>
+                                                </div>
                                             @endfor
+                                            <strong>Tudo a ver comigo</strong>
                                         </div>
                                     </div>
                                 @endforeach

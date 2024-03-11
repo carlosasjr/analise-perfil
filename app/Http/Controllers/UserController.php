@@ -25,6 +25,11 @@ class UserController extends Controller
     }
     public function create(string $url)
     {
+        if (!$company = $this->company->where('url', $url)->first()) {
+            return redirect()->route('company.create')->with('error', 'Empresa não encontrada.');
+        }
+
+
         return view('user.create', compact('url'));
     }
 
