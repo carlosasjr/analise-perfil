@@ -27,6 +27,8 @@ class CompanyRequest extends FormRequest
 
         return [
             'email' => "required|unique:companies,email,{$id},id",
+            'cnpj' => "required",
+            'phone' => "required",
             'name'  => 'required|min:3|max:121'
         ];
     }
