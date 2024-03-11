@@ -39,7 +39,12 @@ class UserController extends Controller
         $user = $company->users()
             ->firstOrCreate(
                 ['email' => $data['email']],
-                ['name' => $data['name']]
+                [
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'phone' => $data['phone'],
+
+                ]
             );
 
 
