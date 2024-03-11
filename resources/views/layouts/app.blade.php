@@ -34,7 +34,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto text-center">
-                        <img src="{{ url('/images/metodo.png') }}" alt="Metodo infinite">
+                        <a href="{{ url('') }}">
+                            <img src="{{ url('/images/metodo.png') }}" alt="Metodo infinite">
+                        </a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
