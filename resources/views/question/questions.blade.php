@@ -25,7 +25,7 @@
                                             @for ($i = 0; $i <= 5; $i++)
                                                 <div class="mr-2 d-flex justify-content-around">
                                                     <input type="radio" name="answers[{{ $question->id }}][score]"
-                                                        class="form-check-input" value="{{ $i }}"
+                                                        class="form-check-input" style="margin: 5px" value="{{ $i }}"
                                                         id="score{{ $question->id }}_{{ $i }}"
                                                         {{ $i == 0 ? 'checked' : '' }}>
                                                     <strong class="form-check-label"
